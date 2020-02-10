@@ -96,6 +96,7 @@ function loadMedia (){
 	soundp1.setAttribute("src","unp	.mp3")
 	intro.pause();
 	soundp1.play();
+	soundp1.vol=0.5
 	nave.image.src= nave.jugador + ".png"
 	nave2.image.src=nave2.jugador + ".png"
 	fondo.onload= function(){
@@ -631,6 +632,7 @@ function dibujarNave (nave){
 			intro.pause();
 	intro.currentTime = 0;
 	intro.play();
+	intro.vol=0.05
 		
 	}
 	document.getElementById("coverPage").addEventListener("click",coverPage)
@@ -705,6 +707,7 @@ function dibujaVida(){
 		soundp1.setAttribute("src","dosp.mp3")
 		intro.pause();
 		soundp1.play();
+		soundp1.vol=0.5
 		nave3.image.src= nave3.jugador + ".png"
 		bot = new Image ();
 		bot.src = "elzeke.png"
