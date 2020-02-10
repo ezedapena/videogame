@@ -67,6 +67,7 @@ var sonidodisparo;
 var muerte;
 var imp;
 var soundp1;
+var dificult;
 //definir funciones
 function loadMedia (){
 	ctx.fillStyle="white";
@@ -597,21 +598,25 @@ function dibujarNave (nave){
 	function play (){
 		if( p2 == false)
 		{
-			if(document.querySelector("input[name = player2]:checked") != null){
+			if (document.querySelector("input[name = player2]:checked") != null && document.querySelector("input[name = dificult]:checked") != null){
 				document.getElementById("panel").style="display:none"
 		document.getElementById("coverPage").style="display:none";
+		dificult=document.querySelector("input[name=dificult]:checked").value
+		document.getElementById("difi").style="display:none";
 				elegirJugador2()
 				loadMedia2()
 				
 			}
 			else{
-				alert("Please select your character");
+				alert("Please select your character & the difficult");
 			}
 		}else{
 		if(document.querySelector("input[name = player1]:checked") != null && document.querySelector("input[name = player2]:checked") != null){
 			elegirJugador()
 			loadMedia()
 			document.getElementById("panel").style="display:none"
+		
+
 					intro.pause();
 		
 		}
@@ -905,7 +910,7 @@ function dibujaVida(){
 				enemigo.contador++;
 				enemigo.x += Math.sin(enemigo.contador * Math.PI/90)*5;
 	
-				if (aleatorio(0,enemigos.length * 10) == 4){
+				if (aleatorio(0,enemigos.length * dificult) == 4){
 					disparosEnemigos.push(agregarDisparosEnemigos(enemigo))
 				}
 			}
@@ -948,5 +953,6 @@ function dibujaVida(){
 			p2 = true
 			document.getElementById("panel-p2").style="display:inline !important"
 			document.getElementById("p2Button").style="display:none !important"
+			document.getElementById("difi").style="display:none";
 		}
 		document.getElementById("p2Button").addEventListener("click",addP2)
