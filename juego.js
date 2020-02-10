@@ -3,8 +3,13 @@ var p2 = false
 var canvas = document.querySelector ("#canvas");
 var ctx = canvas.getContext('2d');
 //crear el objeto de la nave
+var intro;
+	intro = document.createElement("audio");
+	document.body.appendChild(intro);
+	intro.setAttribute("src","intro.mp3");
+
 var nave = {
-	hp: 20,
+	hp: 24,
 	x:850,
 	y: (canvas.height /2 ) -20,
 	width:50,
@@ -14,9 +19,19 @@ var nave = {
 	jugador:""
 }
 var nave2 = {
-	hp: 20,
+	hp: 24,
 	x:150,
 	y: (canvas.height /2 ) -20,
+	width:50,
+	height:50,
+	image : new Image(),
+	contador:0,
+	jugador:""
+}
+var nave3 = {
+	hp: 20,
+	x:450,
+	y: (canvas.height /2 ) +40,
 	width:50,
 	height:50,
 	image : new Image(),
@@ -48,7 +63,10 @@ var disparos2Right=[];
 var disparosEnemigos=[];
 //DEFINIR VARIABLES PARA LAS IMAGENES
 var fondo;
-
+var sonidodisparo;
+var muerte;
+var imp;
+var soundp1;
 //definir funciones
 function loadMedia (){
 	ctx.fillStyle="white";
@@ -63,6 +81,20 @@ function loadMedia (){
 	tiro2 = new Image();
 	tiro2.src = "azul.gif";
 	tiromalo = new Image();
+	sonidodisparo = document.createElement("audio");
+	document.body.appendChild(sonidodisparo);
+	sonidodisparo.setAttribute("src","tiro.mp3");
+	imp = document.createElement("audio");
+	document.body.appendChild(imp);
+	imp.setAttribute("src","imp.mp3")
+	muerte = document.createElement("audio");
+	document.body.appendChild(muerte);
+	muerte.setAttribute("src","muert.mp3")
+	soundp1 = document.createElement("audio");
+	document.body.appendChild(soundp1);
+	soundp1.setAttribute("src","unp	.mp3")
+	intro.pause();
+	soundp1.play();
 	nave.image.src= nave.jugador + ".png"
 	nave2.image.src=nave2.jugador + ".png"
 	fondo.onload= function(){
@@ -152,15 +184,19 @@ function dibujarNave (nave){
 		// 	teclado.fire=false;	
 		// }
 		if (nave.estado == "hit"){
-			if(nave.hp > 0){
+			if(nave.hp > 1){
 				nave.hp--;
 				nave.estado="vivo";
 			}else{
 				nave.estado="muerto";
 				juego.estado="zeke";
-				textoRespuesta.titulo="Player 1 Wins";
+				textoRespuesta.titulo= nave2.jugador[0].toUpperCase()+ nave2.jugador.slice(1) + " Wins";
 				textoRespuesta.subtitulo="Presiona la tecla R para continuar";
 				textoRespuesta.contador=0;
+
+					muerte.pause();
+					muerte.currentTime = 0;
+					muerte.play();
 			}									
 		}
 	}
@@ -210,16 +246,18 @@ function dibujarNave (nave){
 		// 	teclado2.fire=false;	
 		// }
 		if (nave2.estado == "hit"){
-			if(nave2.hp > 0){
+			if(nave2.hp > 1){
 				nave2.hp--
 				nave2.estado="vivo"
 			}else{
 				nave2.estado="muerto";
 				juego.estado="ivan";
-				textoRespuesta.titulo="Player 2 Wins";
+				textoRespuesta.titulo=  nave.jugador[0].toUpperCase()+ nave.jugador.slice(1) + " Wins";
 				textoRespuesta.subtitulo="Presiona la tecla R para continuar";
 				textoRespuesta.contador=0;
-			
+									muerte.pause();
+					muerte.currentTime = 0;
+					muerte.play();
 			}
 		}
 	}
@@ -285,6 +323,9 @@ function dibujarNave (nave){
 		})
 	}
 	function fire(){
+		sonidodisparo.pause();
+		sonidodisparo.currentTime = 0;
+		sonidodisparo.play();
 		disparos1Up.push({
 			x:nave.x+20,
 			y:nave.y+20,
@@ -311,7 +352,10 @@ function dibujarNave (nave){
 		})
 	}
 	function fire2(){
-		disparos2Up.push({
+		sonidodisparo.pause();
+		sonidodisparo.currentTime = 0;
+		sonidodisparo.play();
+		disparos2Up.push({	
 			x:nave2.x+20,
 			y:nave2.y+20,
 			width:10,
@@ -382,7 +426,7 @@ function dibujarNave (nave){
 	function dibujaTexto (){
 		if(textoRespuesta.contador==-1)return;
 		var alpha = textoRespuesta.contador;
-		if (alpha>1){
+		if (alpha>0){
 			for (var i in enemigos){
 				delete enemigos[i];
 			}
@@ -472,6 +516,9 @@ function dibujarNave (nave){
 			var disparo=disparos1Up[i];
 			if (hit (disparo,nave2)){
 				nave2.estado="hit";
+									imp.pause();
+					imp.currentTime = 0;
+					imp.play();
 			}
 		
 		}
@@ -479,18 +526,27 @@ function dibujarNave (nave){
 			var disparo2=disparos1Down[i];
 			if (hit (disparo2,nave2)){
 				nave2.estado="hit";
+									imp.pause();
+					imp.currentTime = 0;
+					imp.play();
 			}
 		}
 		for (var i in disparos1Left){
 			var disparo3=disparos1Left[i];
 			if (hit (disparo3,nave2)){
 				nave2.estado="hit";
+									imp.pause();
+					imp.currentTime = 0;
+					imp.play();
 			}
 		}
 		for (var i in disparos1Right){
 			var disparo4=disparos1Right[i];
 			if (hit (disparo4,nave2)){
 				nave2.estado="hit";
+									imp.pause();
+					imp.currentTime = 0;
+					imp.play();
 			}
 		}
 		
@@ -499,24 +555,36 @@ function dibujarNave (nave){
 			var disparo=disparos2Up[i];
 			if (hit (disparo,nave)){
 				nave.estado="hit";
+					imp.pause();
+					imp.currentTime = 0;
+					imp.play();
 			}
 		}
 		for (var i in disparos2Down){
 			var disparo2=disparos2Down[i];
 			if (hit (disparo2,nave)){
 				nave.estado="hit";
+									imp.pause();
+					imp.currentTime = 0;
+					imp.play();
 			}
 		}
 		for (var i in disparos2Left){
 			var disparo3=disparos2Left[i];
 			if (hit (disparo3,nave)){
 				nave.estado="hit";
+									imp.pause();
+					imp.currentTime = 0;
+					imp.play();
 			}
 		}
 		for (var i in disparos2Right){
 			var disparo4=disparos2Right[i];
 			if (hit (disparo4,nave)){
 				nave.estado="hit";
+									imp.pause();
+					imp.currentTime = 0;
+					imp.play();
 			}
 		}
 	}
@@ -544,7 +612,8 @@ function dibujarNave (nave){
 			elegirJugador()
 			loadMedia()
 			document.getElementById("panel").style="display:none"
-			
+					intro.pause();
+		
 		}
 		else{
 			alert("Please select your characters");
@@ -554,6 +623,9 @@ function dibujarNave (nave){
 	function coverPage(){
 		document.getElementById("coverPage").style="display:none";
 		document.getElementById("play").addEventListener("click",play)
+			intro.pause();
+	intro.currentTime = 0;
+	intro.play();
 		
 	}
 	document.getElementById("coverPage").addEventListener("click",coverPage)
@@ -611,7 +683,24 @@ function dibujaVida(){
 		tiro.src = "rojo.gif";
 		tirobot = new Image();
 		tirobot.src = "azul.gif";
-		nave.image.src= nave.jugador + ".png"
+		sonidodisparo = document.createElement("audio");
+		document.body.appendChild(sonidodisparo);
+		sonidodisparo.setAttribute("src","tiro.mp3");
+		sonidomalo= document.createElement("audio");
+		document.body.appendChild(sonidomalo);
+		sonidomalo.setAttribute("src","malardo.mp3");
+		imp = document.createElement("audio");
+		document.body.appendChild(imp);
+		imp.setAttribute("src","imp.mp3")
+		muerte = document.createElement("audio");
+		document.body.appendChild(muerte);
+		muerte.setAttribute("src","muert.mp3")
+		soundp1 = document.createElement("audio");
+		document.body.appendChild(soundp1);
+		soundp1.setAttribute("src","dosp.mp3")
+		intro.pause();
+		soundp1.play();
+		nave3.image.src= nave3.jugador + ".png"
 		bot = new Image ();
 		bot.src = "elzeke.png"
 		fondo.onload= function(){
@@ -619,12 +708,15 @@ function dibujaVida(){
 		}
 	}
 	function elegirJugador2() {
-		nave.jugador=document.querySelector("input[name=player2]:checked").value
+		nave3.jugador=document.querySelector("input[name=player2]:checked").value
 	}
 	function fire3(){
+		sonidodisparo.pause();
+		sonidodisparo.currentTime = 0;
+		sonidodisparo.play();
 		disparos1Up.push({
-			x:nave.x+20,
-			y:nave.y+20,
+			x:nave3.x+20,
+			y:nave3.y+20,
 			width:10,
 			height:30
 		})
@@ -639,15 +731,20 @@ function dibujaVida(){
 				if (hit (disparo,enemigo)){
 					enemigo.estado="hit";
 					enemigo.contador=0;
+					muerte.pause();
+					muerte.currentTime = 0;
+					muerte.play();
 				}
 			}
 		}
-		if (nave.estado == "hit" || nave.estado == "muerto") return;
+		if (nave3.estado == "hit" || nave3.estado == "muerto") return;
 		for (var i in disparosEnemigos){
 			var disparo=disparosEnemigos[i];
-			if (hit (disparo,nave)){
-				nave.estado="hit";
-				console.log ("contacto")
+			if (hit (disparo,nave3)){
+				nave3.estado="hit";
+					imp.pause();
+					imp.currentTime = 0;
+					imp.play();
 			}
 		}
 	
@@ -710,32 +807,32 @@ function dibujaVida(){
 	function moverNave3 (){
 		if (teclado[37]){
 			//movimiento a la izquierda
-			nave.x-=10;
-			if (nave.x<10) {
-				nave.x=0;
+			nave3.x-=10;
+			if (nave3.x<10) {
+				nave3.x=0;
 			}
 		}
 		if (teclado[39]){
 			//movimiento a la izquierda
-			var limite = canvas.width - nave.width;
-			nave.x+=10;
-			if (nave.x>limite) {
-				nave.x=limite;
+			var limite = canvas.width - nave3.width;
+			nave3.x+=10;
+			if (nave3.x>limite) {
+				nave3.x=limite;
 			}
 		}
 		if (teclado[40]){
 			//movimiento a la izquierda
-			var limite = canvas.height - nave.height;
-			nave.y+=10;
-			if (nave.y>limite) {
-				nave.y=limite;
+			var limite = canvas.height - nave3.height;
+			nave3.y+=10;
+			if (nave3.y>limite) {
+				nave3.y=limite;
 			}
 		}
 		if (teclado[38]){
 			//movimiento a la izquierda
-			nave.y-=10;
-			if (nave.y<10) {
-				nave.y=0;
+			nave3.y-=10;
+			if (nave3.y<10) {
+				nave3.y=0;
 			}
 		}
 		if (teclado[32]){
@@ -748,11 +845,11 @@ function dibujaVida(){
 				}
 	
 		}
-		if (nave.estado == "hit"){
-			nave.contador++;
-			if (nave.contador>=20){
-				nave.contador=0;
-				nave.estado="muerto";
+		if (nave3.estado == "hit"){
+			nave3.contador++;
+			if (nave3.contador>=10){
+				nave3.contador=0;
+				nave3.estado="muerto";
 				juego.estado="perdido";
 				textoRespuesta.titulo="Game Over";
 				textoRespuesta.subtitulo="Presiona la tecla R para continuar";
@@ -772,7 +869,9 @@ function dibujaVida(){
 		}
 		if ((juego.estado=="perdido" || juego.estado=="victoria") && teclado[82]){
 			juego.estado = "iniciando";
-			nave.estado="vivo";
+			nave3.estado="vivo";
+			nave3.x= 450;
+			nave3.y = (canvas.height /2 ) +40;
 			textoRespuesta.contador=-1;
 		}
 	}
@@ -787,7 +886,7 @@ function dibujaVida(){
 			}
 		}
 		if (juego.estado == 'iniciando'){
-			for (var i=0;i<10;i++){
+			for (var i=0;i<14;i++){
 				enemigos.push({
 					x:10+(i*50),
 					y:10,
@@ -812,7 +911,7 @@ function dibujaVida(){
 			}
 			if (enemigo && enemigo.estado=="hit"){
 				enemigo.contador++;
-				if (enemigo.contador>=20){
+				if (enemigo.contador>=0){
 					enemigo.estado = "muerto";
 					enemigo.contador=0;
 				}
@@ -841,13 +940,13 @@ function dibujaVida(){
 		dibujarDisparosEnemigos();
 		dibujarDisparos();
 		dibujaTexto2();
-		dibujarNave(nave);
+		dibujarNave(nave3);
 		}
 
 		//MAGIA
 		function addP2(){
 			p2 = true
 			document.getElementById("panel-p2").style="display:inline !important"
-			document.getElementById("p2Button").style="display:none"
+			document.getElementById("p2Button").style="display:none !important"
 		}
 		document.getElementById("p2Button").addEventListener("click",addP2)

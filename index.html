@@ -22,16 +22,14 @@
 	<link rel="stylesheet" type="text/css" href="juego.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
-<header class="navbar navbar-dark bg-secondary d-flex justify-content-between">
+<header class="navbar d-flex justify-content-between">
 	
-	<a href="index.html"><img src="ico/apple-icon-120x120.png"><button type="button" class="btn btn-light">HOME</button></a>
+	<a href="index.html"><img src="logo.png" id="logo">RESET</a>
 	 
-	<div>	
-	<button type="button" class="btn btn-light" id="controlsButton">CONTROLS</button>
-	<button type="button" class="btn btn-light" id="rulesButton">RULES</button>
-</div>
+	<a href="#" id="controlsButton">CONTROLS</a>
+	<a href="#" id="rulesButton">RULES</a>
 </header>
-<body>
+<body>	
 	<div id="coverPage">
 		<div class="d-flex justify-content-center align-items-center flex-column">
 			<img src="mil3r.png" alt="mil3r TITLE" style="width: 500px;">
@@ -85,7 +83,10 @@
 					</label>
 				</div>
 			</div>
-			<button type="button" class="btn btn-light" id="p2Button">PLAY AGAINST PLAYER 2</button>
+			<div id="p2Button" class="d-flex flex-column">
+			<img src="playAgainst.png" class="addp2">
+			<img src="player2load.png" class="addp2">
+			</div>
 			<div id="panel-p2"  class="d-flex flex-column">
 				<img class="mx-auto" src="player2.png" alt="player2" width="250"> 
 				<div>
