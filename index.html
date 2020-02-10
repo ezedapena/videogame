@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title> MIL3R WARS</title>
+	<link rel="apple-touch-icon" sizes="57x57" href="ico/apple-icon-57x57.png">
+	<link rel="apple-touch-icon" sizes="60x60" href="ico/apple-icon-60x60.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="ico/apple-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="ico/apple-icon-76x76.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="ico/apple-icon-114x114.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="ico/apple-icon-120x120.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="ico/apple-icon-144x144.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="ico/apple-icon-152x152.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="ico/apple-icon-180x180.png">
+	<link rel="icon" type="image/png" sizes="192x192"  href="ico/android-icon-192x192.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="ico/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="ico/favicon-96x96.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="ico/favicon-16x16.png">
+	<link rel="manifest" href="ico/manifest.json">
+	<meta name="msapplication-TileColor" content="#ffffff">
+	<meta name="msapplication-TileImage" content="ico/ms-icon-144x144.png">
+	<meta name="theme-color" content="#ffffff">
+	<link rel="stylesheet" type="text/css" href="juego.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<header class="navbar navbar-dark bg-secondary d-flex justify-content-between">
+	
+	<a href="index.html"><img src="ico/apple-icon-120x120.png"><button type="button" class="btn btn-light">HOME</button></a>
+	 
+	<div>	
+	<button type="button" class="btn btn-light" id="controlsButton">CONTROLS</button>
+	<button type="button" class="btn btn-light" id="rulesButton">RULES</button>
+</div>
+</header>
+<body>
+	<div id="coverPage">
+		<div class="d-flex justify-content-center align-items-center flex-column">
+			<img src="mil3r.png" alt="mil3r TITLE" style="width: 500px;">
+			<img src="wars.png" alt="wars TITLE" style="width: 500px;">
+			<h2 class="mt-5">Click anywhere to START</h2>
+			
+		</div>
+	</div>
+	<div id="panel">
+		<div class="d-flex justify-content-between">
+			<div id="panel-p1" class=" d-flex flex-column">
+				<img class="mx-auto" src="player1.png" alt="player1" width="250">
+				<div>
+					<label>
+						<input type="radio" name="player2" value="eze">
+						<img src="eze.png" width="75">
+						<img src="ezeL.png" width="75">
+					</label>
+					<label>
+						<input type="radio" name="player2" value="lean">
+						<img src="lean.png" width="75">
+						<img src="leanL.png" width="75">
+					</label>
+					
+				</div>
+				<div>
+					<label>
+						<input type="radio" name="player2" value="ivan">
+						<img src="ivan.png" width="75">
+						<img src="ivanL.png" width="75">
+					</label>
+					<label>
+						<input type="radio" name="player2" value="eri">
+						<img src="eri.png" width="75">
+						<img src="eriL.png" width="75">
+					</label>
+				</div>
+				<div>
+					
+					
+					<label>
+						<input type="radio" name="player2" value="meji">
+						<img src="meji.png" width="75">
+						<img src="mejiL.png" width="75">				  
+					</label>
+					
+					<label>
+						<input type="radio" name="player2" value="roman">
+						<img src="roman.png" width="75">
+						<img src="romanL.png" width="75">
+					</label>
+				</div>
+			</div>
+			<button type="button" class="btn btn-light" id="p2Button">PLAY AGAINST PLAYER 2</button>
+			<div id="panel-p2"  class="d-flex flex-column">
+				<img class="mx-auto" src="player2.png" alt="player2" width="250"> 
+				<div>
+					<label>
+						<input type="radio" name="player1" value="eze">
+						<img src="eze.png" width="75">
+						<img src="ezeL.png" width="75">
+					</label>
+					<label>
+						<input type="radio" name="player1" value="lean">
+						<img src="lean.png" width="75">
+						<img src="leanL.png" width="75">
+					</label>
+					
+				</div>
+				<div>
+					<label>
+						<input type="radio" name="player1" value="ivan">
+						<img src="ivan.png" width="75">
+						<img src="ivanL.png" width="75">
+					</label>
+					<label>
+						<input type="radio" name="player1" value="eri">
+						<img src="eri.png" width="75">
+						<img src="eriL.png" width="75">
+					</label>
+				</div>
+				<div>
+				
+					<label>
+						<input type="radio" name="player1" value="meji">
+						<img src="meji.png" width="75">
+						<img src="mejiL.png" width="75">		  
+					</label>
+					<label>
+						<input type="radio" name="player1" value="roman">
+						<img src="roman.png" width="75">
+						<img src="romanL.png" width="75">
+					</label>
+				</div>
+			</div>
+		</div>
+		<div class="d-flex justify-content-around">
+		<button type="button" class="btn btn-outline-light mt-3" name="play" value="jugar" id="play">PLAY!</button>
+	</div>
+	</div>
+	
+<div id="rules" class="dropdown-menu p-3">
+	<h2>RULES</h2>
+	<p>You only have 1 objective... KILL YOUR ENEMY!</p>
+	<p>Both of you have 3 Health Point, don´t lose them or you will lose, and you don´t want it</p>
+	<button type="button" class="btn btn-outline-info mt-5" id="accept">OK!</button>
+</div>
+<div id="controls" class="dropdown-menu p-3">
+	<h2>CONTROLS</h2>
+	<p>SOLO PLAY:</p>
+	<p>Use the ARROW KEYS to move, shot with SPACEBAR</p>
+	<div class="dropdown-divider"></div>
+	<p>VERSUS PLAYING:</p>
+	<p>PLAYER 1: use WASD to move, press F for FIRE!</p>
+	<p>PLAYER 2: use the arrow keys to move, you shot with INTRO</p>
+	<div><img src="keys.png" width="300px"></div>
+	<button type="button" class="btn btn-outline-info mt-5" id="accept2">OK!</button>
+</div>
+<div id="canvasDiv">
+	<canvas id="canvas" width="1000" height="500"></canvas>
+</div>
+<script src="juego.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
