@@ -9,7 +9,7 @@ var intro;
 	intro.setAttribute("src","intro.mp3");
 
 var nave = {
-	hp: 24,
+	hp: 20,
 	x:850,
 	y: (canvas.height /2 ) -20,
 	width:50,
@@ -19,7 +19,7 @@ var nave = {
 	jugador:""
 }
 var nave2 = {
-	hp: 24,
+	hp: 20,
 	x:150,
 	y: (canvas.height /2 ) -20,
 	width:50,
@@ -184,7 +184,7 @@ function dibujarNave (nave){
 		// 	teclado.fire=false;	
 		// }
 		if (nave.estado == "hit"){
-			if(nave.hp > 1){
+			if(nave.hp > 0){
 				nave.hp--;
 				nave.estado="vivo";
 			}else{
@@ -246,7 +246,7 @@ function dibujarNave (nave){
 		// 	teclado2.fire=false;	
 		// }
 		if (nave2.estado == "hit"){
-			if(nave2.hp > 1){
+			if(nave2.hp > 0){
 				nave2.hp--
 				nave2.estado="vivo"
 			}else{
