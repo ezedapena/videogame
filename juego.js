@@ -16,7 +16,8 @@ var nave = {
 	height:50,
 	image : new Image(),
 	contador:0,
-	jugador:""
+	jugador:"",
+	direccion:"izquierda"
 }
 var nave2 = {
 	hp: 20,
@@ -26,7 +27,8 @@ var nave2 = {
 	height:50,
 	image : new Image(),
 	contador:0,
-	jugador:""
+	jugador:"",
+	direccion2:"derecha"
 }
 var nave3 = {
 	hp: 20,
@@ -51,7 +53,7 @@ var enemigos=[];
 var teclado ={}
 var teclado2={}
 //array para los disparos
-var disparos1Up=[];
+var disparos1=[];
 var disparos1Down=[];
 var disparos1Left=[];
 var disparos1Right=[];
@@ -145,6 +147,7 @@ function dibujarNave (nave){
 		if (teclado[37]){
 			//movimiento a la izquierda
 			nave.x-=10;
+			nave.direccion="izquierda"
 			if (nave.x<10) {
 				nave.x=0;
 			}
@@ -153,6 +156,7 @@ function dibujarNave (nave){
 			//movimiento a la izquierda
 			var limite = canvas.width - nave.width;
 			nave.x+=10;
+			nave.direccion="derecha"
 			if (nave.x>limite) {
 				nave.x=limite;
 			}
@@ -161,6 +165,7 @@ function dibujarNave (nave){
 			//movimiento a la izquierda
 			var limite = canvas.height - nave.height;
 			nave.y+=10;
+			nave.direccion="abajo"
 			if (nave.y>limite) {
 				nave.y=limite;
 			}
@@ -168,6 +173,7 @@ function dibujarNave (nave){
 		if (teclado[38]){
 			//movimiento a la izquierda
 			nave.y-=10;
+			nave.direccion="arriba"
 			if (nave.y<10) {
 				nave.y=0;
 			}
@@ -207,6 +213,7 @@ function dibujarNave (nave){
 		if (teclado2[65]){
 			//movimiento a la izquierda
 			nave2.x-=10;
+			nave2.direccion2="izquierda"
 			if (nave2.x<10) {
 				nave2.x=0;
 			}
@@ -215,6 +222,7 @@ function dibujarNave (nave){
 			//movimiento a la derecha
 			var limite = canvas.width - nave2.width;
 			nave2.x+=10;
+			nave2.direccion2="derecha"
 			if (nave2.x>limite) {
 				nave2.x=limite;
 			}
@@ -223,6 +231,7 @@ function dibujarNave (nave){
 			//movimiento a abajo
 			var limite = canvas.height - nave2.height;
 			nave2.y+=10;
+			nave2.direccion2="abajo"
 			if (nave2.y>limite) {
 				nave2.y=limite;
 			}
@@ -230,6 +239,7 @@ function dibujarNave (nave){
 		if (teclado2[87]){
 			//movimiento a arriba
 			nave2.y-=10;
+			nave2.direccion2="arriba"
 			if (nave2.y<10) {
 				nave2.y=0;
 			}
@@ -265,34 +275,46 @@ function dibujarNave (nave){
 	}
 	
 	function moverDisparos(){
-		for (let i in disparos1Up){
-			var disparo= disparos1Up[i];
+		// if (nave.direccion=="arriba")
+		// {
+		for (let i in disparos1){
+			var disparo= disparos1[i];
 			disparo.y -= 10	;
 		}
+		disparos1=disparos1.filter(function(disparo){
+			return disparo.y>0;
+		})
+		// }
+		// else if (nave.direccion=="abajo")
+		// {
 		for (let i in disparos1Down){
 			var disparo2= disparos1Down[i];
 			disparo2.y += 10;	
 		}
-		disparos1Up=disparos1Up.filter(function(disparo){
-			return disparo.y>0;
-		})
 		disparos1Down=disparos1Down.filter(function(disparo){
 			return disparo2.y>0;
 		})
+		// }
+		// else if (nave.direccion=="izquierda")
+		// {
 		for (let i in disparos1Left){
 			var disparo3= disparos1Left[i];
 			disparo3.x -= 10	;
 		}
+		disparos1Left=disparos1Left.filter(function(disparo){
+			return disparo3.x>0;
+		})
+		// }
+		// else if (nave.direccion=="derecha")
+		// {
 		for (let i in disparos1Right){
 			var disparo4= disparos1Right[i];
 			disparo4.x += 10;	
 		}
-		disparos1Left=disparos1Left.filter(function(disparo){
-			return disparo3.x>0;
-		})
 		disparos1Right=disparos1Right.filter(function(disparo){
 			return disparo4.x>0;
-		})
+		})		
+		// }
 	}
 	function moverDisparos2(){
 		for (let i in disparos2Up){
@@ -328,65 +350,83 @@ function dibujarNave (nave){
 		sonidodisparo.pause();
 		sonidodisparo.currentTime = 0;
 		sonidodisparo.play();
-		disparos1Up.push({
+		if (nave.direccion=="arriba") {
+		disparos1.push({
 			x:nave.x+20,
 			y:nave.y+20,
 			width:10,
 			height:30
-		})
+		})	
+		}
+		else if (nave.direccion=="abajo")
+		{
 		disparos1Down.push({
 			x:nave.x+20,
 			y:nave.y+20,
 			width:10,
 			height:30
 		})
+		}
+		else if (nave.direccion=="izquierda") {
 		disparos1Left.push({
 			x:nave.x+20,
 			y:nave.y+20,
 			width:10,
 			height:30
 		})
+		}
+		else if (nave.direccion=="derecha"){
 		disparos1Right.push({
 			x:nave.x+20,
 			y:nave.y+20,
 			width:10,
 			height:30
-		})
+		})	
+		}
 	}
 	function fire2(){
 		sonidodisparo.pause();
 		sonidodisparo.currentTime = 0;
 		sonidodisparo.play();
-		disparos2Up.push({	
+		if (nave2.direccion2=="arriba") {
+		disparos2Up.push({
 			x:nave2.x+20,
 			y:nave2.y+20,
 			width:10,
 			height:30
-		})
+		})	
+		}
+		else if (nave2.direccion2=="abajo")
+		{
 		disparos2Down.push({
 			x:nave2.x+20,
 			y:nave2.y+20,
 			width:10,
 			height:30
 		})
+		}
+		else if (nave2.direccion2=="izquierda") {
 		disparos2Left.push({
 			x:nave2.x+20,
 			y:nave2.y+20,
 			width:10,
 			height:30
 		})
+		}
+		else if (nave2.direccion2=="derecha"){
 		disparos2Right.push({
 			x:nave2.x+20,
 			y:nave2.y+20,
 			width:10,
 			height:30
-		})
+		})	
+		}
 	}
 	function dibujarDisparos(){
 		ctx.save();
 		ctx.fillStyle = "white";
-		for (var i in disparos1Up){
-			var disparo = disparos1Up[i];
+		for (var i in disparos1){
+			var disparo = disparos1[i];
 			ctx.drawImage(tiro,disparo.x,disparo.y,15,15);
 		}
 		for (var i in disparos1Down){
@@ -444,8 +484,8 @@ function dibujarNave (nave){
 			for (var i in disparos2Right){
 				delete disparos2Right[i];
 			}
-			for (var i in disparos1Up){
-				delete disparos1Up[i];
+			for (var i in disparos1){
+				delete disparos1[i];
 			}
 			for (var i in disparos1Down){
 				delete disparos1Down[i];
@@ -514,8 +554,8 @@ function dibujarNave (nave){
 	}
 	function verificarContacto(){
 		if (nave2.estado == "hit" || nave2.estado == "muerto") return;
-		for (var i in disparos1Up){
-			var disparo=disparos1Up[i];
+		for (var i in disparos1){
+			var disparo=disparos1[i];
 			if (hit (disparo,nave2)){
 				nave2.estado="hit";
 									imp.pause();
